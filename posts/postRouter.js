@@ -1,27 +1,31 @@
-const express = 'express';
+const express = require('express');
 
-const router = express.Router();
+const dbPost = require('./postDb')
 
-router.get('/', (req, res) => {
+const postRouter = express.Router();
 
-});
 
-router.get('/:id', (req, res) => {
+postRouter.get('/', getAllPosts);
+// postRouter.get('/:id', getPostById);
+// postRouter.delete('/:id', deletePost);
+// postRouter.put('/:id', editPost);
 
-});
+function getAllPosts(req, res) {
+    dbPost.get().then(posts => {
+        res.status(200).json(posts)
+    })
+    .catch(error => {
+        res.status(500).json({
+            errorMessage: "info not available: " + error 
+        })
+    })
 
-router.delete('/:id', (req, res) => {
-
-});
-
-router.put('/:id', (req, res) => {
-
-});
+}
 
 // custom middleware
 
 function validatePostId(req, res, next) {
 
-};
+}
 
-module.exports = router;
+module.exports = postRouter;

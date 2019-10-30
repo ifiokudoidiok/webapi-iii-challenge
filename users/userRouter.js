@@ -1,32 +1,34 @@
-const express = 'express';
+const express = require('express');
 
-const router = express.Router();
+const dbUser = require('./userDb');
 
-router.post('/', (req, res) => {
+const userRouter = express.Router();
 
-});
-
-router.post('/:id/posts', (req, res) => {
+userRouter.post('/', (req, res) => {
 
 });
 
-router.get('/', (req, res) => {
+userRouter.post('/:id/posts', (req, res) => {
 
 });
 
-router.get('/:id', (req, res) => {
+userRouter.get('/', (req, res) => {
 
 });
 
-router.get('/:id/posts', (req, res) => {
+userRouter.get('/:id', (req, res) => {
 
 });
 
-router.delete('/:id', (req, res) => {
+userRouter.get('/:id/posts', (req, res) => {
 
 });
 
-router.put('/:id', (req, res) => {
+userRouter.delete('/:id', (req, res) => {
+
+});
+
+userRouter.put('/:id', (req, res) => {
 
 });
 
@@ -44,4 +46,4 @@ function validatePost(req, res, next) {
 
 };
 
-module.exports = router;
+module.exports = userRouter;
