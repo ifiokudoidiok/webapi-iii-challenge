@@ -7,8 +7,22 @@ const postRouter = express.Router();
 
 postRouter.get('/', getAllPosts);
 postRouter.get('/:id', validatePostId, getPostById);
-// postRouter.delete('/:id', deletePost);
+postRouter.delete('/:id', validatePostId, deletePost);
 // postRouter.put('/:id', editPost);
+
+function deletePost(req, res) {
+dbPost.remove(req.post.id)
+.then( () => {
+res.status(200).json({
+    success:true,
+    message: "Successfully Deleted"
+})
+})
+.catch( error => {
+    res.status(500).json({
+        errorMessage: "Could not Delete, Server error: "+error})
+})
+}
 
 function getAllPosts(req, res) {
     dbPost.get().then(posts => {
