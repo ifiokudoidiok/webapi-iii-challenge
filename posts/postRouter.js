@@ -8,7 +8,20 @@ const postRouter = express.Router();
 postRouter.get('/', getAllPosts);
 postRouter.get('/:id', validatePostId, getPostById);
 postRouter.delete('/:id', validatePostId, deletePost);
-// postRouter.put('/:id', editPost);
+postRouter.put('/:id', validatePostId, editPost);
+
+function editPost(req, res) {
+
+dbPost.update(req.post.id, req.body)
+.then(post => {
+    res.status(200).json(post)
+})
+.catch(error => {
+    res.status(500).json({
+        message: "Could not Update Post: " + error
+    })
+})
+}
 
 function deletePost(req, res) {
 dbPost.remove(req.post.id)
