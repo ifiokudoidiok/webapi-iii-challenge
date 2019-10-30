@@ -14,7 +14,7 @@ function editPost(req, res) {
 
 dbPost.update(req.post.id, req.body)
 .then(post => {
-    res.status(200).json(post)
+    res.status(200).json({...req.post, ...req.body})
 })
 .catch(error => {
     res.status(500).json({
@@ -28,7 +28,9 @@ dbPost.remove(req.post.id)
 .then( () => {
 res.status(200).json({
     success:true,
-    message: "Successfully Deleted"
+    message: "Successfully Deleted",
+
+deleted:req.post
 })
 })
 .catch( error => {
