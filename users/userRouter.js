@@ -7,10 +7,21 @@ const userRouter = express.Router();
 userRouter.get('/', getAllUsers);
 userRouter.get('/:id',validateUserId, getUserById);
 userRouter.post('/', validateUser , postUser);
+// userRouter.put('/:id',validateUserId,validateUser, editUser);
+userRouter.delete('/:id',validateUserId, deleteUser);
 // userRouter.post('/:id/posts', createUsersPost);
 // userRouter.get('/:id/posts', getUsersPost);
-// userRouter.delete('/:id', deleteUser);
-// userRouter.put('/:id', editUser);
+
+function deleteUser(req, res){
+    dbUser.remove(req.user.id)
+    .then(() => {
+        res.status(200).json({message:"Deleted succesfully"})
+    })
+    .catch(error => {
+        res.status(500).json({
+            errorMessage: "Could not Delete, Server error: "+error})
+    })
+}
 
 function postUser(req, res) {
     dbUser.insert(req.body)
