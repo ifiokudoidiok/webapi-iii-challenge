@@ -4,33 +4,24 @@ const dbUser = require('./userDb');
 
 const userRouter = express.Router();
 
-userRouter.post('/', (req, res) => {
+userRouter.get('/', getAllUsers);
+// userRouter.post('/', postUser);
+// userRouter.post('/:id/posts', createUsersPost);
+// userRouter.get('/:id', getUserById);
+// userRouter.get('/:id/posts', getUsersPost);
+// userRouter.delete('/:id', deleteUser);
+// userRouter.put('/:id', editUser);
 
-});
-
-userRouter.post('/:id/posts', (req, res) => {
-
-});
-
-userRouter.get('/', (req, res) => {
-
-});
-
-userRouter.get('/:id', (req, res) => {
-
-});
-
-userRouter.get('/:id/posts', (req, res) => {
-
-});
-
-userRouter.delete('/:id', (req, res) => {
-
-});
-
-userRouter.put('/:id', (req, res) => {
-
-});
+function getAllUsers(req, res) {
+ dbUser.get().then(users => {
+     res.status(200).json(users)
+ })
+ .catch(error => {
+    res.status(500).json({
+        errorMessage: "info not available: " + error 
+    })
+})
+}
 
 //custom middleware
 
