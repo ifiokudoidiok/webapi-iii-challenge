@@ -62,3 +62,5 @@ typings/
 
 # Vscode Debugger
 .vscode
+
+/.env
